@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Subscribers</title>
+    <!-- Favicon for the website --> 
+    <link rel="icon" type="image/jpg" href="/GetYouTubeSubscribers/src/Favicon/YTicon.jpeg" >
+    <!-- Importing Tailwind CSS for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f4f6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            background-color: #197bac;
+            color: #fff;
+            padding: 20px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-body p {
+            color: #4b5563;
+        }
+
+        .api-link {
+            color: #940c0c;
+            text-decoration: underline;
+            cursor: pointer; /* Add cursor pointer */
+        }
+
+        .copy-btn {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background-color: #43a047;
+        }
+
+        .input-field {
+            width: calc(100% - 40px);
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #d1d5db;
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+
+        .get-btn {
+            background-color: #4caf50; /* Green color for GET button */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .get-btn:hover {
+            background-color: #43a047; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body class="bg-black flex items-center justify-center min-h-screen">
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="text-2xl font-bold text-center">Get All Subscribers
+                    <button onclick="window.location.href='/subscribers'" class="get-btn ml-4">GET</button>
+                </h1>
+            </div>
+            <div class="card-body">
+                <p>Returns an array of all subscribers in the database.</p>
+            </div>
+        </div>
+        <div class="card mt-8">
+            <div class="card-header">
+                <h1 class="text-2xl font-bold text-center">Get Subscriber Names
+                    <button onclick="window.location.href='/subscribers/names'" class="get-btn ml-4">GET</button>
+                </h1>
+            </div>
+            <div class="card-body">
+                <p>Returns an array of subscribers with only their names and subscribed channels.</p>
+            </div>
+        </div>
+        <div class="card mt-8">
+            <div class="card-header">
+                <h1 class="text-2xl font-bold text-center">Get Subscriber by ID</h1>
+            </div>
+            <div class="card-body">
+                <p>For example, ID: <span id="copy">6650aa14a1f77740781af604</span> <button class="copy-btn" onclick="copyText()">Copy</button></p>
+                <input placeholder="Enter ID" type="text" id="input-id-3" class="input-field">
+                <button onclick="updateLink(3)" class="get-btn">GET</button>
+                <br>
+                <span id="add-html-3"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript functions for updating link and copying text -->
+    <script>
+        function updateTextBox(endpoint, index) {
+            document.getElementById('input-id-' + index).value = endpoint;
+        }
+
+        function updateLink(index) {
+            const inputId = document.getElementById('input-id-' + index).value;
+            const span = document.getElementById('add-html-' + index);
+            span.innerHTML = `GET <a href="http://localhost:3000/subscribers/${inputId}" class="api-link">${inputId}</a> - Returns the details of a subscriber with the given ID.`;
+        }
+
+        function copyText() {
+            const paragraph = document.getElementById('copy');
+            const text = paragraph.textContent;
+            navigator.clipboard.writeText(text)
+        }
+    </script>
+</body>
+</html>
